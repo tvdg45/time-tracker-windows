@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" lang="en">
+<head>
+</head>
+<body style="text-align: center; margin-left: 0px; margin-right: 0px; background-color: #FBDFCC; margin-top: auto; margin-bottom: auto; font-family: Arial, Helvetica, sans-serif;">
+    <script type="text/javascript" src="https://www.timothysdigitalsolutions.com/backstretch/js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="https://www.timothysdigitalsolutions.com/backstretch/js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.timothysdigitalsolutions.com/backstretch/js/jquery.backstretch.js"></script>
+    <div class="content"></div>
+    <script type='text/javascript'>
+			$(document).ready(function() {
+
+				var xhttp = new XMLHttpRequest();
+
+				xhttp.onreadystatechange = function() {
+
+					if (this.readyState == 4 && this.status == 200) {
+						
+						$(".content").html(this.responseText);
+					}
+				};
+
+				xhttp.open("POST", "https://localhost:44366/time-tracker-interface.aspx");
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+				xhttp.send("admin_session=1");
+			});
+
+			//console.clear();
+    </script>
+</body>
+</html>
