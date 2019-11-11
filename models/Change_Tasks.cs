@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using System.Linq;
@@ -360,14 +360,14 @@ namespace Timothys_Digital_Solutions_Time_Tracker.models
 
                 output = "success";
             }
-            catch (MySqlException e)
+            catch (MySqlException)
             {
                 LOGGER.Debug("The 'company_time_tracker_tasks' " +
                     "table is corrupt or does not exist");
 
                 Create_new_table();
 
-                output = e.Message;
+                output = "fail";
             }
 
             return output;
