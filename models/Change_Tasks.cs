@@ -117,16 +117,28 @@ namespace Timothys_Digital_Solutions_Time_Tracker.models
 
         private static int Generate_row_id()
         {
-            int output;
+            int output = 0;
 
             try
             {
                 using (MySqlCommand command = connection.CreateCommand())
                 {
                     command.CommandText = "SELECT row_id FROM " +
-                        "company_time_tracker_tasks ORDER BY row_id DESC";
+                        "company_time_tracker_tasks ORDER BY row_id DESC LIMIT 1";
 
-                    output = (int)command.ExecuteScalar();
+                    if ((int)command.ExecuteScalar() > 0)
+                    {
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                output = reader.GetInt32("row_id");
+                            }
+                        }
+                    } else
+                    {
+                        output = 0;
+                    }
                 }
             }
             catch (Exception e)
